@@ -1,0 +1,165 @@
+
+plugins {
+    alias(libs.plugins.android.application)
+}
+
+android {
+    namespace 'com.wenxing.runyitong'
+    compileSdk 34
+    
+    configurations.all {
+        resolutionStrategy {
+            force 'androidx.activity:activity:1.6.1'
+        }
+    }
+
+    defaultConfig {
+        applicationId "com.wenxing.runyitong"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        
+        // 指定支持的CPU架构，确保百度语音识别库文件正确打包
+        ndk {
+            abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86'
+        }
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+        release {
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            debuggable true
+            minifyEnabled false
+            testCoverageEnabled false
+        }
+        
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            debuggable false
+        }
+    }
+    
+    // 确保所有变体都不标记为测试版本
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            if (output.outputFile != null && output.outputFile.name.endsWith('.apk')) {
+                output.outputFileName = "${variant.name}-${variant.versionName}.apk"
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    buildFeatures {
+        buildConfig true
+    }
+
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/DEPENDENCIES']
+            excludes += ['META-INF/LICENSE']
+            excludes += ['META-INF/LICENSE.txt']
+            excludes += ['META-INF/NOTICE']
+            excludes += ['META-INF/NOTICE.txt']
+            excludes += ['META-INF/ASL2.0']
+            excludes += ['META-INF/LGPL2.1']
+        }
+        doNotStrip '**/*.so'
+        jniLibs {
+           // useLegacyPackaging = false // 禁用传统打包，启用16KB页面大小兼容
+            useLegacyPackaging true
+            // 确保百度语音识别相关库文件被保留
+            pickFirsts += ['**/libBaiduSpeechSDK.so',
+                          '**/libbdEASRAndroid.so',
+                          '**/libbdSpilWakeup.so',
+                          '**/libbd_easr_s1_merge_normal_20151216.dat.so',
+                          '**/libvad.dnn.so']
+            // 明确不排除这些库文件
+            excludes -= ['**/libBaiduSpeechSDK.so',
+                        '**/libbdEASRAndroid.so',
+                        '**/libbdSpilWakeup.so',
+                        '**/libbd_easr_s1_merge_normal_20151216.dat.so',
+                        '**/libvad.dnn.so']
+        }
+    }
+    
+    // 配置jniLibs的路径
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs']
+        }
+    }
+}
+
+
+
+dependencies {
+    implementation libs.appcompat
+    implementation libs.material
+    implementation files('src/main/resources/libs/libapshare.jar')
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    
+    // 网络请求依赖
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.google.code.gson:gson:2.8.9'
+    
+    // ExoPlayer依赖
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.19.1'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.19.1'
+    // OkHttp 核心库
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'  // 使用最新稳定版
+
+    // 可选：日志拦截器（调试用）
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.12.0'
+    
+    // 支付宝SDK
+    implementation 'com.alipay.sdk:alipaysdk-android:15.8.11'
+    
+    // 微信支付SDK
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.8.0'
+    
+    // PDF生成库
+    implementation 'com.itextpdf:itextg:5.5.10'
+    
+    // 安全加密库 - 用于SecurityManager的加密存储功能
+    implementation 'androidx.security:security-crypto:1.1.0-alpha06'
+    
+    // 百度语音识别SDK
+    // 注意：由于Maven仓库中的依赖存在问题，请手动下载百度语音识别SDK
+    // 1. 前往百度AI开放平台下载最新的语音识别SDK：https://ai.baidu.com/sdk
+    // 2. 将SDK的jar文件放入app/src/main/resources/libs目录
+    // 3. 取消下面的注释以使用本地文件依赖
+    implementation files('src/main/resources/libs/bdasr_V3_20250507_b610f20.jar')
+    implementation 'com.google.code.gson:gson:2.8.9'
+
+}

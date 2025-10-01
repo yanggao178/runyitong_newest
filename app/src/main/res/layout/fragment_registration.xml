@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- 美化的标题栏 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            android:backgroundTint="@color/primary_color">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="24dp">
+
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/ic_appointment"
+                    android:layout_marginEnd="16dp"
+                    app:tint="@color/white" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="挂号预约"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="选择您的挂号方式"
+                        android:textSize="10sp"
+                        android:textColor="#E8F4FD"
+                        android:layout_marginTop="4dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- 挂号方式选择 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="24dp">
+
+            <!-- 按医院挂号 -->
+            <Button
+                android:id="@+id/btn_hospital_registration"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="按医院挂号"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/button_text_selector"
+                android:background="@drawable/button_hospital_selector"
+                android:drawableLeft="@drawable/ic_hospital"
+                android:drawablePadding="8dp"
+                android:gravity="center"
+                android:elevation="4dp" />
+
+            <!-- 按医生挂号 -->
+            <Button
+                android:id="@+id/btn_doctor_registration"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="按医生挂号"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/button_text_selector"
+                android:background="@drawable/button_doctor_selector"
+                android:drawableLeft="@drawable/ic_doctor"
+                android:drawablePadding="8dp"
+                android:gravity="center"
+                android:elevation="4dp" />
+
+        </LinearLayout>
+
+        <!-- 内容区域 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            android:backgroundTint="@color/white">
+
+            <LinearLayout
+                android:id="@+id/content_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+
+
+                <!-- 医院列表容器 -->
+                <LinearLayout
+                    android:id="@+id/layout_hospital_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="选择医院"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="16dp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_hospitals"
+                        android:layout_width="match_parent"
+                        android:layout_height="1200dp"
+                        android:nestedScrollingEnabled="false" />
+
+                </LinearLayout>
+
+                <!-- 医生列表容器 -->
+                <LinearLayout
+                    android:id="@+id/layout_doctor_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="选择医生"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="16dp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_doctors"
+                        android:layout_width="match_parent"
+                        android:layout_height="1000dp"
+                        android:nestedScrollingEnabled="false" />
+
+                </LinearLayout>
+
+                <!-- 科室选择容器 -->
+                <LinearLayout
+                    android:id="@+id/layout_department_selection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="选择科室"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="16dp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_departments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false" />
+
+                </LinearLayout>
+
+                <!-- 时间选择容器 -->
+                <LinearLayout
+                    android:id="@+id/layout_time_selection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="选择时间"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- 日期选择 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="预约日期"
+                        android:textSize="10sp"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginBottom="8dp" />
+
+                    <Button
+                        android:id="@+id/btn_select_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="选择日期"
+                        android:textColor="@color/primary_color"
+                        android:background="@drawable/button_outline"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- 时间段选择 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="可用时间段"
+                        android:textSize="10sp"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginBottom="8dp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_time_slots"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false" />
+
+                    <Spinner
+                        android:id="@+id/spinner_time_slots"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="8dp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+                <!-- 患者信息 -->
+                <LinearLayout
+                    android:id="@+id/layout_patient_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="患者信息"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- 选择信息显示 -->
+                    <TextView
+                        android:id="@+id/text_selected_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="已选择信息将在这里显示"
+                        android:textSize="10sp"
+                        android:textColor="@color/text_secondary"
+                        android:background="@color/background_light"
+                        android:padding="12dp"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- 患者姓名 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="患者姓名 *"
+                        android:textSize="10sp"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginBottom="8dp" />
+
+                    <EditText
+                        android:id="@+id/edit_patient_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="@drawable/edittext_background"
+                        android:padding="12dp"
+                        android:hint="请输入患者姓名"
+                        android:textSize="10sp"
+                        android:inputType="textPersonName"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- 患者电话 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="联系电话 *"
+                        android:textSize="10sp"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginBottom="8dp" />
+
+                    <EditText
+                        android:id="@+id/edit_patient_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="@drawable/edittext_background"
+                        android:padding="12dp"
+                        android:hint="请输入联系电话"
+                        android:textSize="10sp"
+                        android:inputType="phone"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- 患者身份证号 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="身份证号 *"
+                        android:textSize="10sp"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginBottom="8dp" />
+
+                    <EditText
+                        android:id="@+id/edit_patient_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="@drawable/edittext_background"
+                        android:padding="12dp"
+                        android:hint="请输入身份证号"
+                        android:textSize="10sp"
+                        android:inputType="text"
+                        android:layout_marginBottom="16dp" />
+
+                </LinearLayout>
+
+                <!-- 症状描述 -->
+                <LinearLayout
+                    android:id="@+id/layout_symptoms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="症状描述（可选）"
+                        android:textSize="10sp"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginBottom="8dp" />
+
+                    <EditText
+                        android:id="@+id/edit_symptoms"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:background="@drawable/edittext_background"
+                        android:padding="12dp"
+                        android:hint="请简要描述您的症状..."
+                        android:textSize="10sp"
+                        android:gravity="top|start"
+                        android:inputType="textMultiLine"
+                        android:layout_marginBottom="24dp" />
+
+                </LinearLayout>
+
+                <!-- 确认预约按钮已移除 -->
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- 加载状态 -->
+        <LinearLayout
+            android:id="@+id/layout_loading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="32dp"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="16dp" />
+
+            <TextView
+                android:id="@+id/tv_loading_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="正在加载数据..."
+                android:textSize="10sp"
+                android:textColor="#7F8C8D" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

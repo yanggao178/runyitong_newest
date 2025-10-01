@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 深色模式主色调 -->
+    <color name="colorPrimary">#64B5F6</color>
+    <color name="colorPrimaryDark">#42A5F5</color>
+    <color name="colorAccent">#FF80AB</color>
+    <color name="primary_color">#64B5F6</color>
+    
+    <!-- 深色模式文本颜色 -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#B0BEC5</color>
+    <color name="text_hint">#8799A3</color>
+    
+    <!-- 深色模式背景颜色 -->
+    <color name="background_light">#121212</color>
+    <color name="card_background">#1E1E1E</color>
+    <color name="card_background_secondary">#2D2D2D</color>
+    <color name="input_background">#2D2D2D</color>
+    <color name="input_border">#424242</color>
+    <color name="input_border_focused">#64B5F6</color>
+    
+    <!-- 深色模式状态颜色 -->
+    <color name="colorSuccess">#66BB6A</color>
+    <color name="colorWarning">#FFCA28</color>
+    <color name="color_danger">#EF5350</color>
+    <color name="text_success">#66BB6A</color>
+    <color name="text_error">#EF5350</color>
+    
+    <!-- 深色模式其他颜色 -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="divider_color">#424242</color>
+    <color name="light_gray">#616161</color>
+    <color name="progress_background">#424242</color>
+    
+    <!-- 深色模式渐变颜色 -->
+    <color name="gradient_start">#64B5F6</color>
+    <color name="gradient_end">#42A5F5</color>
+    <color name="button_primary_gradient_start">#64B5F6</color>
+    <color name="button_primary_gradient_end">#42A5F5</color>
+    
+    <!-- 深色模式按钮颜色 -->
+    <color name="button_secondary_background">#2D2D2D</color>
+    <color name="button_ripple_color">#3364B5F6</color>
+    <color name="button_secondary_ripple_color">#3342A5F5</color>
+    <color name="button_secondary_pressed">#3D3D3D</color>
+    <color name="button_disabled_background">#424242</color>
+    <color name="button_disabled_stroke">#616161</color>
+    <color name="button_disabled_text">#757575</color>
+    
+    <!-- 深色模式状态背景颜色 -->
+    <color name="status_active_bg">#1E3A32</color>
+    <color name="status_completed_bg">#1A2B3C</color>
+    <color name="status_cancelled_bg">#3C1A1A</color>
+    <color name="status_default_bg">#2D2D2D</color>
+    
+    <!-- 深色模式警告和错误颜色 -->
+    <color name="warning_color">#FFCA28</color>
+    <color name="error_color">#EF5350</color>
+    
+    <!-- 深色模式卡片阴影 -->
+    <color name="card_shadow">#00000000</color>
+    
+    <!-- 深色模式覆盖背景 -->
+    <color name="overlay_background">#A0000000</color>
+</resources>

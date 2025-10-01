@@ -1,0 +1,17 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+alias(libs.plugins.android.application) apply false
+}
+
+
+//buildscript {
+//    repositories {
+//        // 这里的仓库是为Gradle插件服务的，与项目依赖的仓库是分开的
+//        google()
+//        mavenCentral()
+//    }
+//    dependencies {
+//        classpath "com.android.tools.build:gradle:8.5" // 请使用您当前的版本
+//        // 注意：如果您有其他需要 classpath 的插件，例如Hilt、Navigation SafeArgs等，请保留在这里
+//    }
+//}
